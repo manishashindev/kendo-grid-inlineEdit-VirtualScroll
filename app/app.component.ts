@@ -27,11 +27,11 @@ import { Product } from './model';
       (add)="addHandler($event)" >
       <kendo-grid-column title="ProductID" field="ProductID" editor="numeric"></kendo-grid-column>
       <kendo-grid-column title="ProductName" field="ProductName" editor="string"></kendo-grid-column>
-      <kendo-grid-command-column title="command" width="220">
+      <kendo-grid-command-column title="command" width="140">
       <ng-template kendoGridCellTemplate let-isNew="isNew">
         <button kendoGridEditCommand [primary]="true">Edit</button>
         <button kendoGridRemoveCommand>Remove</button>
-        <button kendoGridSaveCommand [disabled]="formGroup?.invalid">
+        <button kendoGridSaveCommand>
           {{ isNew ? "Add" : "Update" }}
         </button>
         <button kendoGridCancelCommand>
@@ -40,9 +40,6 @@ import { Product } from './model';
       </ng-template>
     </kendo-grid-command-column>
     </kendo-grid>
-
-    <button (click)="applyFilters()">Apply filters</button>
-    <button (click)="removeFilters()">Remove filters</button>
   `
 })
 export class AppComponent {
@@ -62,14 +59,6 @@ export class AppComponent {
 
   constructor(@Inject(EditService) editServiceFactory: () => EditService) {
     this.editService = editServiceFactory();
-  }
-
-  public applyFilters(): void {
-    this.filters = { operator: con => con.group.id === 2 };
-  }
-
-  public removeFilters(): void {
-    this.filters = undefined;
   }
   public ngOnInit(): void {
     this.view = this.editService.pipe(
