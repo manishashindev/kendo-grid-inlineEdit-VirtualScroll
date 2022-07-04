@@ -14,7 +14,6 @@ import { Product } from './model';
   template: `
     <kendo-grid
       [data]="view | async"
-      [kendoGridBinding]="gridView"
       [height]="height"
       [rowHeight]="rowHeight"
       [pageSize]="gridState.take"
@@ -49,7 +48,6 @@ import { Product } from './model';
 export class AppComponent {
   //public gridView = gridMockData;
   public view: Observable<GridDataResult>;
-  public pageSize = 63;
   public height = 180;
   public rowHeight = 30;
   public filters: FilterDescriptor;
@@ -59,7 +57,7 @@ export class AppComponent {
   public gridState: State = {
     sort: [],
     skip: 0,
-    take: 5,
+    take: 100,
   };
 
   constructor(@Inject(EditService) editServiceFactory: () => EditService) {
